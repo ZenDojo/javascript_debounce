@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <button>Debounce</button>
+
+    <script>
+        const myBtn = document.querySelector('button');
+        function clickBtn() {
+            console.log('User Clicked');
+            console.log(this);
+            console.log(arguments);
+        }
+        function debounce(func, delay) {
+            let timer
+            return function () {
+                let context = this
+                let args = arguments
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    func.call(context, args)
+                }, delay);
+            }
+        }
+        myBtn.addEventListener('click', debounce(clickBtn, 1000, 'asd'))
+    </script>
+</body>
+
+</html>
